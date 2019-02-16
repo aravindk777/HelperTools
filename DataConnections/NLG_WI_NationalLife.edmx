@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NLG_WI_NationalLifeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="NLG_WI_NationalLifeModelStoreContainer">
+          <EntitySet Name="srcAgent" EntityType="NLG_WI_NationalLifeModel.Store.srcAgent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="srcAgentProfile" EntityType="NLG_WI_NationalLifeModel.Store.srcAgentProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="srcUserProfile" EntityType="NLG_WI_NationalLifeModel.Store.srcUserProfile" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId" Association="NLG_WI_NationalLifeModel.Store.FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId">
+            <End Role="srcAgentProfile" EntitySet="srcAgentProfile" />
+            <End Role="srcAgent" EntitySet="srcAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId" Association="NLG_WI_NationalLifeModel.Store.FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId">
+            <End Role="srcUserProfile" EntitySet="srcUserProfile" />
+            <End Role="srcAgentProfile" EntitySet="srcAgentProfile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="srcAgent">
+          <Key>
+            <PropertyRef Name="UserAgentId" />
+          </Key>
+          <Property Name="UserAgentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AgentProfileId" Type="bigint" Nullable="false" />
+          <Property Name="AgentNumber" Type="varchar" MaxLength="100" />
+          <Property Name="Terminated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="srcAgentProfile">
+          <Key>
+            <PropertyRef Name="AgentProfileId" />
+          </Key>
+          <Property Name="AgentProfileId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserProfileId" Type="bigint" Nullable="false" />
+          <Property Name="PrimaryAffiliation" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SecondaryAffiliation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractId" Type="int" />
+          <Property Name="DistChannelId" Type="int" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="OffMgrException" Type="bit" />
+          <Property Name="AgtAsstException1" Type="bit" />
+          <Property Name="AgtAsstException2" Type="bit" />
+          <Property Name="LOA" Type="bit" />
+          <Property Name="DynamicEGAR" Type="bit" />
+          <Property Name="ElevatedAgentNumbers" Type="varchar(max)" />
+          <Property Name="ElevatedRoleId" Type="int" />
+          <Property Name="OnbaseFlag" Type="bit" />
+          <Property Name="IncentiveFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="srcUserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MiddleIntitial" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="PreferredName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="Address2" Type="varchar" MaxLength="200" />
+          <Property Name="Address3" Type="varchar" MaxLength="200" />
+          <Property Name="City" Type="varchar" MaxLength="40" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="10" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="OnbaseFlag" Type="bit" />
+          <Property Name="LastModified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId">
+          <End Role="srcAgentProfile" Type="NLG_WI_NationalLifeModel.Store.srcAgentProfile" Multiplicity="1" />
+          <End Role="srcAgent" Type="NLG_WI_NationalLifeModel.Store.srcAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="srcAgentProfile">
+              <PropertyRef Name="AgentProfileId" />
+            </Principal>
+            <Dependent Role="srcAgent">
+              <PropertyRef Name="AgentProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId">
+          <End Role="srcUserProfile" Type="NLG_WI_NationalLifeModel.Store.srcUserProfile" Multiplicity="1" />
+          <End Role="srcAgentProfile" Type="NLG_WI_NationalLifeModel.Store.srcAgentProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="srcUserProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="srcAgentProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_GetAgentProfileData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NLG_WI_NationalLifeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="NLG_WI_NationalLifeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="srcAgents" EntityType="NLG_WI_NationalLifeModel.srcAgent" />
+          <EntitySet Name="srcAgentProfiles" EntityType="NLG_WI_NationalLifeModel.srcAgentProfile" />
+          <EntitySet Name="srcUserProfiles" EntityType="NLG_WI_NationalLifeModel.srcUserProfile" />
+          <AssociationSet Name="FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId" Association="NLG_WI_NationalLifeModel.FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId">
+            <End Role="srcAgentProfile" EntitySet="srcAgentProfiles" />
+            <End Role="srcAgent" EntitySet="srcAgents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId" Association="NLG_WI_NationalLifeModel.FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId">
+            <End Role="srcUserProfile" EntitySet="srcUserProfiles" />
+            <End Role="srcAgentProfile" EntitySet="srcAgentProfiles" />
+          </AssociationSet>
+          <FunctionImport Name="usp_GetAgentProfileData" ReturnType="Collection(NLG_WI_NationalLifeModel.AgentProfileDataSet)">
+          <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="srcAgent">
+          <Key>
+            <PropertyRef Name="UserAgentId" />
+          </Key>
+          <Property Name="UserAgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentProfileId" Type="Int64" Nullable="false" />
+          <Property Name="AgentNumber" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Terminated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="srcAgentProfile" Relationship="NLG_WI_NationalLifeModel.FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId" FromRole="srcAgent" ToRole="srcAgentProfile" />
+        </EntityType>
+        <EntityType Name="srcAgentProfile">
+          <Key>
+            <PropertyRef Name="AgentProfileId" />
+          </Key>
+          <Property Name="AgentProfileId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserProfileId" Type="Int64" Nullable="false" />
+          <Property Name="PrimaryAffiliation" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="SecondaryAffiliation" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="DistChannelId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="OffMgrException" Type="Boolean" />
+          <Property Name="AgtAsstException1" Type="Boolean" />
+          <Property Name="AgtAsstException2" Type="Boolean" />
+          <Property Name="LOA" Type="Boolean" />
+          <Property Name="DynamicEGAR" Type="Boolean" />
+          <Property Name="ElevatedAgentNumbers" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ElevatedRoleId" Type="Int32" />
+          <Property Name="OnbaseFlag" Type="Boolean" />
+          <Property Name="MerrillFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="srcAgents" Relationship="NLG_WI_NationalLifeModel.FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId" FromRole="srcAgentProfile" ToRole="srcAgent" />
+          <NavigationProperty Name="srcUserProfile" Relationship="NLG_WI_NationalLifeModel.FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId" FromRole="srcAgentProfile" ToRole="srcUserProfile" />
+          <Property Type="Boolean" Name="IncentiveFlag" />
+        </EntityType>
+        <EntityType Name="srcUserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MiddleIntitial" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PreferredName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Address3" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="OnbaseFlag" Type="Boolean" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="srcAgentProfiles" Relationship="NLG_WI_NationalLifeModel.FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId" FromRole="srcUserProfile" ToRole="srcAgentProfile" />
+        </EntityType>
+        <Association Name="FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId">
+          <End Role="srcAgentProfile" Type="NLG_WI_NationalLifeModel.srcAgentProfile" Multiplicity="1" />
+          <End Role="srcAgent" Type="NLG_WI_NationalLifeModel.srcAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="srcAgentProfile">
+              <PropertyRef Name="AgentProfileId" />
+            </Principal>
+            <Dependent Role="srcAgent">
+              <PropertyRef Name="AgentProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId">
+          <End Role="srcUserProfile" Type="NLG_WI_NationalLifeModel.srcUserProfile" Multiplicity="1" />
+          <End Role="srcAgentProfile" Type="NLG_WI_NationalLifeModel.srcAgentProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="srcUserProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="srcAgentProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="AgentProfileDataSet">
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MiddleIntitial" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PreferredName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Zipcode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastModified" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NLG_WI_NationalLifeModelStoreContainer" CdmEntityContainer="NLG_WI_NationalLifeEntities">
+          <EntitySetMapping Name="srcAgents"><EntityTypeMapping TypeName="NLG_WI_NationalLifeModel.srcAgent"><MappingFragment StoreEntitySet="srcAgent">
+            <ScalarProperty Name="UserAgentId" ColumnName="UserAgentId" />
+            <ScalarProperty Name="AgentProfileId" ColumnName="AgentProfileId" />
+            <ScalarProperty Name="AgentNumber" ColumnName="AgentNumber" />
+            <ScalarProperty Name="Terminated" ColumnName="Terminated" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="srcUserProfiles"><EntityTypeMapping TypeName="NLG_WI_NationalLifeModel.srcUserProfile"><MappingFragment StoreEntitySet="srcUserProfile">
+            <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="MiddleIntitial" ColumnName="MiddleIntitial" />
+            <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+            <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+            <ScalarProperty Name="PreferredName" ColumnName="PreferredName" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="Address2" ColumnName="Address2" />
+            <ScalarProperty Name="Address3" ColumnName="Address3" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="State" ColumnName="State" />
+            <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="OnbaseFlag" ColumnName="OnbaseFlag" />
+            <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAgentProfileData" FunctionName="NLG_WI_NationalLifeModel.Store.usp_GetAgentProfileData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NLG_WI_NationalLifeModel.AgentProfileDataSet">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleIntitial" ColumnName="MiddleIntitial" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="PreferredName" ColumnName="PreferredName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="srcAgentProfiles">
+            <EntityTypeMapping TypeName="IsTypeOf(NLG_WI_NationalLifeModel.srcAgentProfile)">
+              <MappingFragment StoreEntitySet="srcAgentProfile">
+                <ScalarProperty Name="IncentiveFlag" ColumnName="IncentiveFlag" />
+                <ScalarProperty Name="OnbaseFlag" ColumnName="OnbaseFlag" />
+                <ScalarProperty Name="ElevatedRoleId" ColumnName="ElevatedRoleId" />
+                <ScalarProperty Name="ElevatedAgentNumbers" ColumnName="ElevatedAgentNumbers" />
+                <ScalarProperty Name="DynamicEGAR" ColumnName="DynamicEGAR" />
+                <ScalarProperty Name="LOA" ColumnName="LOA" />
+                <ScalarProperty Name="AgtAsstException2" ColumnName="AgtAsstException2" />
+                <ScalarProperty Name="AgtAsstException1" ColumnName="AgtAsstException1" />
+                <ScalarProperty Name="OffMgrException" ColumnName="OffMgrException" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DistChannelId" ColumnName="DistChannelId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="SecondaryAffiliation" ColumnName="SecondaryAffiliation" />
+                <ScalarProperty Name="PrimaryAffiliation" ColumnName="PrimaryAffiliation" />
+                <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+                <ScalarProperty Name="AgentProfileId" ColumnName="AgentProfileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="NLG_WI_NationalLife" ZoomLevel="100">
+        <EntityTypeShape EntityType="NLG_WI_NationalLifeModel.srcAgent" Width="1.5" PointX="6.125" PointY="1" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLG_WI_NationalLifeModel.srcAgentProfile" Width="1.5" PointX="3.625" PointY="0.625" Height="4.480205078125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLG_WI_NationalLifeModel.srcUserProfile" Width="1.5" PointX="1" PointY="0.5" Height="4.6725065104166656" IsExpanded="true" />
+        <AssociationConnector Association="NLG_WI_NationalLifeModel.FK_srcAgent_AgentProfileId_srcAgentProfile_AgentProfileId" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.125" PointY="1.9901432291666668" />
+          <ConnectorPoint PointX="6.125" PointY="1.9901432291666668" />
+        </AssociationConnector>
+        <AssociationConnector Association="NLG_WI_NationalLifeModel.FK_srcAgentProfile_UserProfileId_srcUserProfile_UserProfileId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.5" PointY="2.8651025390625" />
+          <ConnectorPoint PointX="3.625" PointY="2.8651025390625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

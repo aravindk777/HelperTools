@@ -1,0 +1,9 @@
+﻿<Window x:Class="Helper_UI.HelperUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HelperUI" Height="150" Width="525" Icon="/Helper_UI;component/Iconshock-Real-Vista-Construction-Tool-kit.ico">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Button Name="BtnSplitWindow" Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click" />
+        <Button Name="BtnRunMyQuery" Content="Execute Query" Height="40" Margin="5" Click="BtnRunMyQuery_Click" />
+    </StackPanel>
+</Window>

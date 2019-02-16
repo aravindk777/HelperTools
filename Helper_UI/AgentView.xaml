@@ -1,0 +1,27 @@
+﻿<Window x:Class="Helper_UI.AgentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AgentView" Height="300" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <ComboBox Name="ddEnvironment" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" SelectedIndex="0" Width="100">
+                <ComboBoxItem Content="DEV" />
+                <ComboBoxItem Content="UAT" />
+                <ComboBoxItem Content="PROD" />
+            </ComboBox>
+            <Label Content="Agent UserId: " VerticalContentAlignment="Center" />
+            <TextBox Name="txtUserId" Margin="5" Width="100" />
+            <Button Name="btnGet" Content="Get Profile Info" Margin="5" Click="btnGet_Click" />
+        </StackPanel>
+
+        <DataGrid AutoGenerateColumns="True" Grid.Row="1" Height="200" HorizontalAlignment="Left"  Name="dgAgentProfile" VerticalAlignment="Top" Width="Auto" />
+    </Grid>
+</Window>
