@@ -81,16 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AgentView.xaml.cs">
-      <DependentUpon>AgentView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SplitAndMerge.xaml.cs">
       <DependentUpon>SplitAndMerge.xaml</DependentUpon>
     </Compile>
-    <Page Include="AgentView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HelperUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,14 +130,6 @@
     <ProjectReference Include="..\..\PromotionTool\PromotionTool\PromotionTool.csproj">
       <Project>{718A2A4A-2B0D-4597-98FC-49EF38C0DC74}</Project>
       <Name>PromotionTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataConnections\DataConnections.csproj">
-      <Project>{AD344B6E-BBB6-4966-97CD-890C61ECC8D8}</Project>
-      <Name>DataConnections</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RunMyQuery\RunMyQuery.csproj">
-      <Project>{09669114-596B-4B78-B4F4-4AA250342B7E}</Project>
-      <Name>RunMyQuery</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
