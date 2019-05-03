@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Helper_UI.RunAs;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RunMyQuery;
 
 namespace Helper_UI
 {
@@ -21,8 +9,7 @@ namespace Helper_UI
     public partial class HelperUI : Window
     {
         SplitAndMerge splitMergeWindow;
-        RunMyQuery.MainWindow runQueryWindow;
-        AgentView agtView;
+        RunProgramAs runAsWindow;
 
         public HelperUI()
         {
@@ -43,22 +30,10 @@ namespace Helper_UI
             splitMergeWindow.Show();
         }
 
-        private void BtnRunMyQuery_Click(object sender, RoutedEventArgs e)
+        private void BtnRunAs_Click(object sender, RoutedEventArgs e)
         {
-            if (runQueryWindow == null)
-                runQueryWindow = new RunMyQuery.MainWindow();
-
-            runQueryWindow.Show();
+            runAsWindow = new RunProgramAs();
+            runAsWindow.Show();   
         }
-
-        private void BtnAgentView_Click(object sender, RoutedEventArgs e)
-        {
-            if (agtView == null)
-                agtView = new AgentView();
-
-            agtView.Show();
-        }
-
-
     }
 }
