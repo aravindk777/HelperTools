@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Helper_UI
 {
@@ -21,16 +13,46 @@ namespace Helper_UI
     public partial class SplitAndMerge : Window
     {
         public delegate void UpdateOutputResultCallback(string searchChar, string splitChar, string source, bool? styleString, bool? addSpaece);
+
+        #region Properties
         string SearchChar { get; set; }
         string SplitChar { get; set; }
         string SourceInfo { get; set; }
         bool? DecorateOutputAsString { get; set; }
         bool? AddSpaceBtwnResults { get; set; }
 
+        public Dictionary<string, string> SourceList {
+            get{
+                var dict = new Dictionary<string, string>();
+                dict.Add("NewLine", "\r\n");
+                dict.Add("Comma (,)", ",");
+                dict.Add("Pipe (|)", "|");
+                dict.Add("Semicolon (;)", ";");
+
+                return dict;
+            }
+        }
+        #endregion
+
         public SplitAndMerge()
         {
             InitializeComponent();
-            TxtSplitChar.TextChanged += new TextChangedEventHandler(TxtSplitChar_TextChanged);
+            //lstSearchChar.DataContext = SourceList;
+            //DataContext = SourceList;
+            this.Loaded += SplitAndMerge_Loaded;
+        }
+
+        private void SplitAndMerge_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbxSplitChar.TextInput += CbxSplitChar_TextInput;
+            cbxSplitChar.SelectionChanged += CbxSplitChar_SelectionChanged;
+            TxtSplitChar.TextChanged += TxtSplitChar_TextChanged;
+        }
+
+        private void CbxSplitChar_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            // chkNeedSpace.Content = "Space after " + (cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text) + " ?";
+            TxtSplitChar.Text = cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text;
         }
 
         void TxtSplitChar_TextChanged(object sender, TextChangedEventArgs e)
@@ -41,9 +63,10 @@ namespace Helper_UI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TxtOutput.Text = "working...";
+            TxtOutput.Cursor = System.Windows.Input.Cursors.Wait;
 
-            SearchChar = TxtSearchChar.Text;
-            SplitChar = TxtSplitChar.Text;
+            SearchChar = cbxSearchChar.SelectedIndex >=0 ? cbxSearchChar.SelectedValue.ToString() : cbxSearchChar.Text;
+            SplitChar = cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text;
             SourceInfo = TxtSource.Text;
             DecorateOutputAsString = chkIsString.IsChecked;
             AddSpaceBtwnResults = chkNeedSpace.IsChecked;
@@ -83,6 +106,18 @@ namespace Helper_UI
             outputStrings.ForEach(formattedText => { finalReult += string.Format("{0}{1}{2}", formattedText, splitChar, spaceText); });
 
             TxtOutput.Text = finalReult.Remove(finalReult.LastIndexOf(splitChar));
+            TxtOutput.Cursor = System.Windows.Input.Cursors.IBeam;
+        }
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(TxtOutput.Text);
+        }
+
+        private void CbxSplitChar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //chkNeedSpace.Content = "Space after " + (cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text) + " ?";
+            TxtSplitChar.Text = cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text;
         }
     }
 }

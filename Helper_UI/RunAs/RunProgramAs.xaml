@@ -1,0 +1,55 @@
+﻿<Window x:Class="Helper_UI.RunAs.RunProgramAs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Helper_UI.RunAs"
+        mc:Ignorable="d"
+        Title="Run As" Height="400" Width="460" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Username" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="0" Grid.Column="1" CanHorizontallyScroll="True" Orientation="Horizontal">
+            <Label  Name="lblDomainName" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Domain" />
+            <TextBox GotFocus="TextBox_GotFocus"  Name="txtUserName" HorizontalAlignment="Stretch" Height="30" TextWrapping="Wrap" Text="(Username)" VerticalAlignment="Center" MinWidth="160" FontSize="14" />
+        </StackPanel>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Password" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <PasswordBox Grid.Column="1" Name="txtPassword" Grid.Row="1" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Center" Width="200" FontSize="14"/>
+
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,0,5,0">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <RadioButton GroupName="RunAschoice" Name="rbDotnetCore" Margin="0,5,5,5" Checked="RunAsChoices_Checked">.Net Core App</RadioButton>
+                <RadioButton GroupName="RunAschoice" Name="rbNormal" Margin="5,5,0,5" Checked="RunAsChoices_Checked">Normal app</RadioButton>
+            </StackPanel>
+            <TextBox  Name="txtProgramNameWithPath" HorizontalAlignment="Center" Height="25" DockPanel.Dock="Left" MouseDoubleClick="Button_Click"
+                 IsReadOnly="True" TextWrapping="Wrap" Text="(select a file by clicking the Open button)" VerticalAlignment="Center" Width="400" />
+            <Button Content="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="30" Height="25" DockPanel.Dock="Left"
+                    FontFamily="Wingdings" FontWeight="Bold" FontSize="14" Click="Button_Click"/>
+        </DockPanel>
+
+        <Label Content="Parameters to pass if any: " Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"></Label>
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  Name="txtParameters" HorizontalAlignment="Stretch" Height="26" TextWrapping="Wrap" Text="" 
+                 VerticalAlignment="Center" TextChanged="TxtParameters_TextChanged" Margin="10"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Name="ProgramNameWithParams" Text="-" HorizontalAlignment="Center"
+                   TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" ScrollViewer.CanContentScroll="True" 
+                   ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" />
+        
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Run" HorizontalAlignment="Center" Height="30" Name="btnRun" Width="124" Click="BtnRun_Click" />
+    </Grid>
+</Window>
+
+    

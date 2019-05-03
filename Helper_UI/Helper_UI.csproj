@@ -58,7 +58,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Iconshock-Real-Vista-Construction-Tool-kit.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Iconshock-Real-Vista-Construction-Tool-kit.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,7 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SplitAndMerge.xaml.cs">
+    <Compile Include="RunAs\RunProgramAs.xaml.cs">
+      <DependentUpon>RunProgramAs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplitMerge\SplitAndMerge.xaml.cs">
       <DependentUpon>SplitAndMerge.xaml</DependentUpon>
     </Compile>
     <Page Include="HelperUI.xaml">
@@ -96,7 +99,11 @@
       <DependentUpon>HelperUI.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SplitAndMerge.xaml">
+    <Page Include="RunAs\RunProgramAs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplitMerge\SplitAndMerge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,16 +134,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PromotionTool\PromotionTool\PromotionTool.csproj">
-      <Project>{718A2A4A-2B0D-4597-98FC-49EF38C0DC74}</Project>
-      <Name>PromotionTool</Name>
-    </ProjectReference>
+    <Resource Include="Assets\Iconshock-Real-Vista-Construction-Tool-kit.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Iconshock-Real-Vista-Construction-Tool-kit.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Apathae-Satellite-2-Utilities.ico" />
+    <Resource Include="Assets\Apathae-Satellite-2-Utilities.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

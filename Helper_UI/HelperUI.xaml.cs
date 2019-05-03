@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Helper_UI.RunAs;
+using System.Windows;
 
 namespace Helper_UI
 {
@@ -8,6 +9,7 @@ namespace Helper_UI
     public partial class HelperUI : Window
     {
         SplitAndMerge splitMergeWindow;
+        RunProgramAs runAsWindow;
 
         public HelperUI()
         {
@@ -26,6 +28,12 @@ namespace Helper_UI
                 splitMergeWindow = new SplitAndMerge();
 
             splitMergeWindow.Show();
+        }
+
+        private void BtnRunAs_Click(object sender, RoutedEventArgs e)
+        {
+            runAsWindow = new RunProgramAs();
+            runAsWindow.Show();   
         }
     }
 }
