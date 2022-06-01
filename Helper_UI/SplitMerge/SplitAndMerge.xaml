@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Helper_UI.SplitAndMerge" Name="SplitMerge"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SplitAndMerge" Height="500" Width="600">
+        Title="SplitAndMerge" Height="500" Width="850">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -37,6 +37,23 @@
                     <StackPanel Orientation="Horizontal">
                         <CheckBox Content="string?" Name="chkIsString" Margin="2" Height="25" />
                         <CheckBox Content="Space reqd?" Name="chkNeedSpace" Margin="2" Height="25" />
+                        <CheckBox Content="Return Distinct" Name="chkDistinct" Margin="2" Height="25" />
+                        <CheckBox Content="Enable Pagination" Name="chkPaginated" Margin="2" Height="25" />
+                    </StackPanel>
+                    <StackPanel Name="PaginationControls" Orientation="Horizontal">
+                        <ComboBox Name="cbxPageSize" Margin="2" Height="25" BorderBrush="DarkBlue" Background="LightBlue" IsEditable="True" 
+                              ItemsSource="{Binding ElementName=SplitMerge, Path=PageSizes}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedIndex="0"></ComboBox>
+                        <Button Margin="5" Content="|&lt;" Command="{Binding FirstPageCommand}"/>
+                        <Button Margin="5" Content="&lt;" Command="{Binding PrevPageCommand}" />
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Start}"/>
+                            <TextBlock Text=" to "/>
+                            <TextBlock Text="{Binding End}"/>
+                            <TextBlock Text=" of "/>
+                            <TextBlock Text="{Binding TotalItems}"/>
+                        </StackPanel>
+                        <Button Margin="5" Content="&gt;" Command="{Binding NextPageCommand}"/>
+                        <Button Margin="5" Content="&gt;|" Command="{Binding LastPageCommand}" />
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
