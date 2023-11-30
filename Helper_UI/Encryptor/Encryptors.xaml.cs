@@ -45,7 +45,8 @@ namespace Helper_UI.Encryptor
 
         private void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-
+            var reversedString = Encoding.Unicode.GetString(Convert.FromBase64String(txtEncrypted.Text));
+            txtEncrypted.Text = reversedString;
         }
     }
 }
