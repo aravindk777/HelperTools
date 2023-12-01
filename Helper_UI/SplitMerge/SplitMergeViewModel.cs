@@ -1,5 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Helper_UI.SplitMerge
@@ -14,29 +18,27 @@ namespace Helper_UI.SplitMerge
         private ICommand LastCmd;
 
         #region Commands
-        public ICommand FirstPageCommand
-        {
-            get
-            {
-                if (firstCmd == null)
-                {
-                //    firstCmd = new RelayCommand(
-                //    param =>
-                //    {
-                //        start = 0;
-                //        RefreshProducts();
+        //public ICommand FirstPageCommand
+        //{
+        //    get
+        //    {
+        //        if (firstCmd == null)
+        //        {
+        //            // firstCmd = new RelayCommand(
+        //            param =>
+        //            {
+        //                start = 0;
+        //                RefreshProducts();
 
-                //    },
-                //    param =>
-                //    {
-                //        return start - itemCount >= 0 ? true : false;
-                //    }
-                //);
-                //firstCmd = new RelayCommand(param =>)
-                }
-                return firstCmd;
-            }
-        }
+        //            },
+        //            param =>
+        //            {
+        //                return start - itemCount >= 0 ? true : false;
+        //            }
+        //        );
+        //        }
+        //    }
+        //}
         #endregion
     }
 }
