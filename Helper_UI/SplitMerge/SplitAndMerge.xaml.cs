@@ -22,8 +22,10 @@ namespace Helper_UI
         bool? DecorateOutputAsString { get; set; }
         bool? AddSpaceBtwnResults { get; set; }
 
-        public Dictionary<string, string> SourceList {
-            get{
+        public Dictionary<string, string> SourceList
+        {
+            get
+            {
                 var dict = new Dictionary<string, string>();
                 dict.Add("NewLine", "\r\n");
                 dict.Add("Comma (,)", ",");
@@ -54,14 +56,6 @@ namespace Helper_UI
         public int Start { get { return _start + 1; } }
 
         private int _itemCount = 10;
-        private int _totalItems = 0;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public int TotalItems { get { return _totalItems; } }
-        public int End { get { return _start + _itemCount < _totalItems ? _start + _itemCount : _totalItems; } }
-
-        
         #endregion
 
         public SplitAndMerge()
@@ -80,7 +74,6 @@ namespace Helper_UI
             TxtSplitChar.TextChanged += TxtSplitChar_TextChanged;
             chkPaginated.Checked += ChkPaginated_Checked;
             chkPaginated.Unchecked += ChkPaginated_Checked;
-            PaginationControls.Visibility = Visibility.Hidden;
         }
 
         private void ChkPaginated_Checked(object sender, RoutedEventArgs e)
@@ -108,7 +101,7 @@ namespace Helper_UI
             TxtOutput.IsEnabled = false;
             TxtOutput.Cursor = System.Windows.Input.Cursors.Wait;
 
-            SearchChar = cbxSearchChar.SelectedIndex >=0 ? cbxSearchChar.SelectedValue.ToString() : cbxSearchChar.Text;
+            SearchChar = cbxSearchChar.SelectedIndex >= 0 ? cbxSearchChar.SelectedValue.ToString() : cbxSearchChar.Text;
             SplitChar = cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text;
             SourceInfo = TxtSource.Text;
             DecorateOutputAsString = chkIsString.IsChecked;
@@ -122,7 +115,7 @@ namespace Helper_UI
         {
             Thread.Sleep(500);
             TxtOutput.Dispatcher.Invoke(
-                new UpdateOutputResultCallback(ProcessData), 
+                new UpdateOutputResultCallback(ProcessData),
                 SearchChar, SplitChar, SourceInfo, DecorateOutputAsString, AddSpaceBtwnResults
                 );
         }
@@ -147,6 +140,7 @@ namespace Helper_UI
             if (addSpace.HasValue && addSpace.Value)
                 spaceText = " ";
             _results = outputStrings.Select(formattedText => string.Format("{0}{1}{2}", formattedText, splitChar, spaceText));
+            
             finalResult = string.Join(string.Empty, _results);
             TxtOutput.Text = finalResult.Remove(finalResult.LastIndexOf(splitChar));
             TxtOutput.Cursor = System.Windows.Input.Cursors.IBeam;
@@ -163,7 +157,5 @@ namespace Helper_UI
             //chkNeedSpace.Content = "Space after " + (cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text) + " ?";
             TxtSplitChar.Text = cbxSplitChar.SelectedIndex >= 0 ? cbxSplitChar.SelectedValue.ToString() : cbxSplitChar.Text;
         }
-
-        
     }
 }

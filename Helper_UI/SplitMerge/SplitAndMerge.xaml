@@ -23,7 +23,7 @@
 
             <Label Content="Input string" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" />
 
-            <TextBox Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True" Name="TxtSource" Margin="2" />
+            <TextBox Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True" Name="TxtSource" Margin="2" TextChanged="TxtSource_TextChanged" />
 
             <DockPanel Grid.Row="1" Grid.Column="1">
                 <Button DockPanel.Dock="Right" Content="Split" Width="50" Margin="2" Click="Button_Click" Height="25" />
@@ -40,11 +40,11 @@
                         <CheckBox Content="Return Distinct" Name="chkDistinct" Margin="2" Height="25" />
                         <CheckBox Content="Enable Pagination" Name="chkPaginated" Margin="2" Height="25" />
                     </StackPanel>
-                    <StackPanel Name="PaginationControls" Orientation="Horizontal">
+                    <!--<StackPanel Name="PaginationControls" Orientation="Horizontal">
                         <ComboBox Name="cbxPageSize" Margin="2" Height="25" BorderBrush="DarkBlue" Background="LightBlue" IsEditable="True" 
-                              ItemsSource="{Binding ElementName=SplitMerge, Path=PageSizes}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedIndex="0"></ComboBox>
-                        <Button Margin="5" Content="|&lt;" Command="{Binding FirstPageCommand}"/>
-                        <Button Margin="5" Content="&lt;" Command="{Binding PrevPageCommand}" />
+                              ItemsSource="{Binding ElementName=SplitMerge, Path=PageSizes}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedIndex="0" Selected="cbxPageSize_Selected" ></ComboBox>
+                        <Button Margin="5" Content="|&lt;" />
+                        <Button Margin="5" Content="&lt;" />
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{Binding Start}"/>
                             <TextBlock Text=" to "/>
@@ -52,9 +52,9 @@
                             <TextBlock Text=" of "/>
                             <TextBlock Text="{Binding TotalItems}"/>
                         </StackPanel>
-                        <Button Margin="5" Content="&gt;" Command="{Binding NextPageCommand}"/>
-                        <Button Margin="5" Content="&gt;|" Command="{Binding LastPageCommand}" />
-                    </StackPanel>
+                        <Button Margin="5" Content="&gt;" Click="NxtButton_click" />
+                        <Button Margin="5" Content="&gt;|" />
+                    </StackPanel>-->
                 </StackPanel>
             </DockPanel>
             <Label Content="Output" Grid.Row="2" Grid.ColumnSpan="2" />
