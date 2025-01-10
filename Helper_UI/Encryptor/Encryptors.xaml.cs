@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Helper_UI.Encryptor
 {
@@ -29,14 +19,14 @@ namespace Helper_UI.Encryptor
             EncryptText();
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            EncryptText();
-        }
+        //private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        //{
+        //    EncryptText();
+        //}
 
         void EncryptText()
         {
-            var currentPwd = txtPassword.Password;
+            var currentPwd = txtPassword.Text;
             var encodedString = Convert.ToBase64String(Encoding.Unicode.GetBytes(currentPwd.ToCharArray()));
             var reversedString = Encoding.Unicode.GetString(Convert.FromBase64String(encodedString));
             txtPassword.ToolTip = currentPwd;
@@ -45,8 +35,20 @@ namespace Helper_UI.Encryptor
 
         private void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            var reversedString = Encoding.Unicode.GetString(Convert.FromBase64String(txtEncrypted.Text));
-            txtEncrypted.Text = reversedString;
+            try
+            {
+                var reversedString = Encoding.Unicode.GetString(Convert.FromBase64String(txtEncrypted.Text));
+                txtPassword.Text = reversedString;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while decoding the string - {ex}", ex.Message);
+            }
+        }
+
+        private void txtPassword_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }

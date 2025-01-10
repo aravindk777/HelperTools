@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Productivity Helper Tools" Height="150" Width="525" Icon="Assets/Iconshock-Real-Vista-Construction-Tool-kit.ico">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-        <Button Name="BtnSplitWindow" Width="100"  Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click" />
-        <Button Name="BtnRunAs"  Width="100"  Content="Run As" Height="40" Margin="5" Click="BtnRunAs_Click"  />
-        <Button Name="BtnEncryptor"  Width="100"  Content="Encryptors" Height="40" Margin="5" Click="BtnEncryptor_Click"  />
+        <Button Name="BtnSplitWindow" MinWidth="100"  Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click" />
+        <!--<Button Name="BtnRunAs"  MinWidth="100"  Content="Run As" Height="40" Margin="5" Click="BtnRunAs_Click"  />-->
+        <Button Name="BtnEncryptor"  MinWidth="100"  Content="Encryptors" Height="40" Margin="5" Click="BtnEncryptor_Click"  />
+        <Button Name="BtnAdAuthenticator" MinWidth="100"  Content="Test AD Authentication" Height="40" Margin="5" Click="BtnAdAuthenticator_Click"  />
     </StackPanel>
 </Window>
