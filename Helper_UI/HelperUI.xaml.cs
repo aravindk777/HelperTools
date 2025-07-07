@@ -1,4 +1,6 @@
-﻿using Helper_UI.RunAs;
+﻿using Helper_UI.Authenticators.AD;
+using Helper_UI.Encryptor;
+using Helper_UI.RunAs;
 using System.Windows;
 
 namespace Helper_UI
@@ -34,6 +36,18 @@ namespace Helper_UI
         {
             runAsWindow = new RunProgramAs();
             runAsWindow.Show();   
+        }
+
+        private void BtnEncryptor_Click(object sender, RoutedEventArgs e)
+        {
+            var encryptorWindow = new Encryptors();
+            encryptorWindow.Show();
+        }
+
+        private void BtnAdAuthenticator_Click(object sender, RoutedEventArgs e)
+        {
+            var authenticatorTest = new WinADAuth();
+            authenticatorTest.Show();
         }
     }
 }
