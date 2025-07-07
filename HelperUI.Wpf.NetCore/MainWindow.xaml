@@ -8,13 +8,13 @@
         mc:Ignorable="d"
         Title="Productivity Helper Tools" Height="150" Width="525" Icon="Assets/Iconshock-Real-Vista-Construction-Tool-kit.ico">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-        <ui:Button Name="BtnSplitWindow" Width="100"  Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click">
-            <ui:Button.Resources>
+        <Button Name="BtnSplitWindow" Width="100"  Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click">
+            <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
-            </ui:Button.Resources>
-        </ui:Button>
+            </Button.Resources>
+        </Button>
         <Button Name="btnEncode"  Width="100"  Content="Encode/DeCode" Height="40" Margin="5" Click="btnEncode_Click" >
             <Button.Resources>
                 <Style TargetType="Border">
