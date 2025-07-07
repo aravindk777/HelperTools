@@ -1,0 +1,64 @@
+@page "/"
+
+<h3 style="text-align: center; color: #4CAF50; font-family: Arial, sans-serif;">Split and Merge</h3>
+
+<div
+    style="max-width: 90%; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <div style="margin-bottom: 15px;">
+        <label for="sourceInfo" style="display: block; font-weight: bold;">Source Info:</label>
+        <textarea id="sourceInfo" @bind="SourceInfo"
+            style="width: 100%; height: 100px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="searchChar" style="display: block; font-weight: bold;">Search Character:</label>
+        <input id="searchChar" @bind="SearchChar"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="splitChar" style="display: block; font-weight: bold;">Split Character:</label>
+        <input id="splitChar" @bind="SplitChar"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+    <div style="margin-bottom: 15px;">
+        <input type="checkbox" id="decorateOutput" @bind="DecorateOutputAsString" />
+        <label for="decorateOutput" style="font-weight: bold;">Decorate Output as String</label>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <input type="checkbox" id="addSpace" @bind="AddSpaceBtwnResults" />
+        <label for="addSpace" style="font-weight: bold;">Add Space Between Results</label>
+    </div>
+    <div style="text-align: center; margin-bottom: 15px;">
+        <button @onclick="ProcessData"
+            style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Process</button>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="output" style="display: block; font-weight: bold;">Output:</label>
+        <textarea id="output" readonly
+            style="width: 100%; height: 100px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f1f1f1;">@Output</textarea>
+    </div>
+</div>
+
+@code {
+    private string SearchChar { get; set; }
+    private string SplitChar { get; set; }
+    private string SourceInfo { get; set; }
+    private bool DecorateOutputAsString { get; set; }
+    private bool AddSpaceBtwnResults { get; set; }
+    private string Output { get; set; }
+
+    private void ProcessData()
+    {
+        var searchString = SearchChar == "\\r\\n" ? "\n" : SearchChar;
+        var splitChar = SplitChar.Contains("\\r\\n") ? SplitChar.Replace("\\r\\n", "\n") : SplitChar;
+        var outputStrings = SourceInfo.Split(new[] { searchString }, StringSplitOptions.RemoveEmptyEntries).Select(str =>
+        str.Trim());
+
+        if (DecorateOutputAsString)
+        {
+            outputStrings = outputStrings.Select(str => $"'{str}'");
+        }
+
+        var spaceText = AddSpaceBtwnResults ? " " : string.Empty;
+        Output = string.Join(splitChar + spaceText, outputStrings);
+    }
+}
