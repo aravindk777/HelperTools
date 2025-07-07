@@ -1,0 +1,26 @@
+﻿<Window x:Class="HelperUI.Wpf.NetCore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelperUI.Wpf.NetCore" 
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+        mc:Ignorable="d"
+        Title="Productivity Helper Tools" Height="150" Width="525" Icon="Assets/Iconshock-Real-Vista-Construction-Tool-kit.ico">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <ui:Button Name="BtnSplitWindow" Width="100"  Content="Split &amp; Merge" Height="40" Margin="5" Click="BtnSplitWindow_Click">
+            <ui:Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </ui:Button.Resources>
+        </ui:Button>
+        <Button Name="btnEncode"  Width="100"  Content="Encode/DeCode" Height="40" Margin="5" Click="btnEncode_Click" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </StackPanel>
+</Window>
